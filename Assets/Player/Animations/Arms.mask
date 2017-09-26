@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Arms
+  m_Mask: 00000000000000000000000000000000000000000100000001000000010000000100000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/arm_IK_L
+    m_Weight: 1
+  - m_Path: Armature/arm_IK_R
+    m_Weight: 1
+  - m_Path: Armature/elbow_IK_L
+    m_Weight: 1
+  - m_Path: Armature/elbow_IK_R
+    m_Weight: 1
+  - m_Path: Armature/knee_IK_L
+    m_Weight: 1
+  - m_Path: Armature/knee_IK_R
+    m_Weight: 1
+  - m_Path: Armature/leg_IK_L
+    m_Weight: 1
+  - m_Path: Armature/leg_IK_R
+    m_Weight: 1
+  - m_Path: Armature/root
+    m_Weight: 1
+  - m_Path: Armature/root/hips
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/neck
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/neck/head
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/shoulder_L
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/shoulder_L/upper_arm_L
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/shoulder_L/upper_arm_L/lower_arm_L
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/shoulder_L/upper_arm_L/lower_arm_L/hand_L
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/shoulder_R
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/shoulder_R/upper_arm_R
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/shoulder_R/upper_arm_R/lower_arm_R
+    m_Weight: 1
+  - m_Path: Armature/root/hips/spine/chest/shoulder_R/upper_arm_R/lower_arm_R/hand_R
+    m_Weight: 1
+  - m_Path: Armature/root/hips/upper_leg_L
+    m_Weight: 1
+  - m_Path: Armature/root/hips/upper_leg_L/lower_leg_L
+    m_Weight: 1
+  - m_Path: Armature/root/hips/upper_leg_L/lower_leg_L/foot_L
+    m_Weight: 1
+  - m_Path: Armature/root/hips/upper_leg_L/lower_leg_L/foot_L/toes_L
+    m_Weight: 1
+  - m_Path: Armature/root/hips/upper_leg_R
+    m_Weight: 1
+  - m_Path: Armature/root/hips/upper_leg_R/lower_leg_R
+    m_Weight: 1
+  - m_Path: Armature/root/hips/upper_leg_R/lower_leg_R/foot_R
+    m_Weight: 1
+  - m_Path: Armature/root/hips/upper_leg_R/lower_leg_R/foot_R/toes_R
+    m_Weight: 1
+  - m_Path: Cube
+    m_Weight: 1
