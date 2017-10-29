@@ -146,10 +146,10 @@ public class PlayerAnimationController : NetworkBehaviour {
 		}
 	}
 
-	public void DespawnItemThirdPerson ()
+	public void DespawnItemThirdPerson () // Called by animation event handler // TODO: fix weapon spawn/despawn affecting all players
 	{
 		CmdDespawnItemThirdPerson (gameObject.GetComponent<NetworkIdentity>().netId);
-		Debug.Log ("calling command to despawn on " + name);
+		Debug.Log ("Calling command to despawn on " + name);
 	}
 
 	public void SpawnItemFirstPerson () // Called by animation event handler
@@ -180,7 +180,7 @@ public class PlayerAnimationController : NetworkBehaviour {
 	}
 
 	[Command]
-	void CmdSpawnItemThirdPerson (int itemID, NetworkInstanceId playerID) // TODO major rework disregard everything here; we're going to do the synced network id approach
+	void CmdSpawnItemThirdPerson (int itemID, NetworkInstanceId playerID) // Called by public void SpawnThirdPerson()
 	{
 		GameObject player = NetworkServer.FindLocalObject (playerID);
 		PlayerAnimationController animController = player.GetComponent<PlayerAnimationController> ();
@@ -191,7 +191,7 @@ public class PlayerAnimationController : NetworkBehaviour {
 	}
 
 	[Command]
-	void CmdDespawnItemThirdPerson (NetworkInstanceId playerID) // and here
+	void CmdDespawnItemThirdPerson (NetworkInstanceId playerID) // Called by public void DespawnThirdPerson()
 	{
 		GameObject player = NetworkServer.FindLocalObject (playerID);
 		PlayerAnimationController animController = player.GetComponent<PlayerAnimationController> ();

@@ -415,7 +415,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4031424052599360}
   - component: {fileID: 95900915343355370}
-  - component: {fileID: 114533370865298526}
   m_Layer: 0
   m_Name: Player Model
   m_TagString: Untagged
@@ -2528,17 +2527,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItemThirdPerson: {fileID: 0}
   currentItemThirdPersonShadows: {fileID: 0}
---- !u!114 &114533370865298526
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1402503320197122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f4e0b3591613af49abde4c2d97bd446, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114574186576450424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3155,6 +3143,8 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144090387908948684
 CharacterJoint:
   m_ObjectHideFlags: 1
@@ -3197,6 +3187,8 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144210739857955390
 CharacterJoint:
   m_ObjectHideFlags: 1
@@ -3239,6 +3231,8 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144213729213858140
 CharacterJoint:
   m_ObjectHideFlags: 1
@@ -3281,6 +3275,8 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144399774694092958
 CharacterJoint:
   m_ObjectHideFlags: 1
@@ -3323,6 +3319,8 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144402309098193462
 CharacterJoint:
   m_ObjectHideFlags: 1
@@ -3365,6 +3363,8 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144645799827574096
 CharacterJoint:
   m_ObjectHideFlags: 1
@@ -3407,6 +3407,8 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144702503444082696
 CharacterJoint:
   m_ObjectHideFlags: 1
@@ -3449,6 +3451,8 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144875062866519044
 CharacterJoint:
   m_ObjectHideFlags: 1
@@ -3491,6 +3495,8 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!144 &144947939111869332
 CharacterJoint:
   m_ObjectHideFlags: 1
@@ -3533,3 +3539,5 @@ CharacterJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1

@@ -537,7 +537,7 @@ MonoBehaviour:
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
-  m_OnlineScene: map1
+  m_OnlineScene: 
   m_SpawnPrefabs:
   - {fileID: 1530752539527168, guid: 14527ccf9dfa7d440a4eac899a689c99, type: 2}
   - {fileID: 1530752539527168, guid: b25db66890ef43d49a394a2116d9c0ea, type: 2}
@@ -5214,7 +5214,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.36249995, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.22491455, y: 364.07}
+  m_AnchoredPosition: {x: -0.22460938, y: 364.07}
   m_SizeDelta: {x: -0.45007, y: -728.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058527674

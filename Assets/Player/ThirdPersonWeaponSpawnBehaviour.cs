@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ThirdPersonWeaponDespawnBehaviour : StateMachineBehaviour {
+public class ThirdPersonWeaponSpawnBehaviour : StateMachineBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) 
 	{
 		Debug.Log ("Weapon despawn behaviour called");
 		PlayerAnimationController playerAnimationBehaviour = animator.transform.root.GetComponent<PlayerAnimationController> ();
-		playerAnimationBehaviour.GetComponent<PlayerAnimationController> ().DespawnItemThirdPerson ();
+		playerAnimationBehaviour.GetComponent<PlayerAnimationController> ().SpawnItemThirdPerson ();
 		animator.ResetTrigger (PlayerAnimationController.PlayerAnimatorTriggerForceHolster);
 	}
 
