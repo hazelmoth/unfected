@@ -148,8 +148,10 @@ public class PlayerAnimationController : NetworkBehaviour {
 
 	public void DespawnItemThirdPerson () // Called by anim behaviour
 	{
-		CmdDespawnItemThirdPerson (gameObject.GetComponent<NetworkIdentity>().netId);
-		Debug.Log ("Calling command to despawn on " + name);
+		if (hasAuthority) {
+			CmdDespawnItemThirdPerson (gameObject.GetComponent<NetworkIdentity> ().netId);
+			Debug.Log ("Calling command to despawn on " + name);
+		}
 	}
 
 	public void SpawnItemFirstPerson () // Called by animation event handler
@@ -190,7 +192,7 @@ public class PlayerAnimationController : NetworkBehaviour {
 
 		NetworkServer.Spawn (animController.currentItemThirdPerson);
 		NetworkServer.Spawn (animController.currentItemThirdPersonShadows);
-		RpcSpawnItemThirdPerson (animController.currentItemThirdPerson.GetComponent<NetworkIdentity> ().netId);
+		RpcSpawnItemThirdPerson (animController.currentItemThirdPerson.GetComponent<NetworkIdentity> ().netId, animController.currentItemThirdPersonShadows.GetComponent<NetworkIdentity> ().netId);
 	}
 
 	[Command]
@@ -207,10 +209,14 @@ public class PlayerAnimationController : NetworkBehaviour {
 	}
 
 	[ClientRpc]
-	void RpcSpawnItemThirdPerson (NetworkInstanceId netId) // Sets parent of third person item and sets it to proper visibility layer
+	void RpcSpawnItemThirdPerson (NetworkInstanceId itemModelNetId, NetworkInstanceId itemShadowNetId) // Sets parent of third person item and sets it to proper visibility layer
 	{
-		currentItemThirdPerson = ClientScene.FindLocalObject (netId);
+		currentItemThirdPerson = ClientScene.FindLocalObject (itemModelNetId);
+		currentItemThirdPersonShadows = ClientScene.FindLocalObject (itemShadowNetId);
+
 		currentItemThirdPerson.transform.SetParent (thirdPersonRightHand.transform);
+		currentItemThirdPersonShadows.transform.SetParent (thirdPersonRightHand.transform);
+
 		if (isLocalPlayer)
 		{
 			foreach (Transform child in currentItemThirdPerson.GetComponentsInChildren<Transform>())
