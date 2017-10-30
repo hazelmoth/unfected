@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
 
-	[SerializeField] private int itemID;
-	[SerializeField] private int animationID;
-	[SerializeField] private string itemName;
-	[SerializeField] private string description;
-	[SerializeField] private GameObject itemModel;
+	[SerializeField] private int itemID = 0;
+	[SerializeField] private int animationID = 0;
+	[SerializeField] private string itemName = null;
+	[SerializeField] private string description = null;
+	[SerializeField] private GameObject itemModel = null;
 	[SerializeField] private float aimFOVMultiplier = 1.0f;
 
 	public int ItemID              { get { return itemID; }}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour {
 
-	[SerializeField] private ItemDictionary itemDictionary;
+	[SerializeField] private ItemDictionary itemDictionary = null;
 	public static ItemDictionary Dictionary;
 
 	// Use this for initialization

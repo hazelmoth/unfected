@@ -109,7 +109,7 @@ public class PlayerInventory : NetworkBehaviour {
 		CmdDropItem (slotX, slotY);
 		RequestSyncInventory ();
 	}
-
+		
 	[Command]
 	void CmdDropItem (int slotX, int slotY)
 	{
@@ -120,8 +120,7 @@ public class PlayerInventory : NetworkBehaviour {
 		}
 	}
 
-
-	public void MoveInventoryItem (int oldX, int oldY, int newX, int newY)
+	public void MoveInventoryItem (int oldX, int oldY, int newX, int newY) // Move an item from one slot in the inventory to another
 	{
 		CmdMoveInventoryItem (oldX, oldY, newX, newY);
 		RequestSyncInventory ();

@@ -137,7 +137,7 @@ public class PlayerAnimationController : NetworkBehaviour {
 		handAnimator.SetInteger (HandAnimatorIntAnimationID, item.AnimationID);
 	}
 
-	public void SpawnItemThirdPerson () // Called by animation event handler
+	public void SpawnItemThirdPerson () // Called by anim behaviour
 	{
 		Debug.Log ("Spawning third person item");
 		if (currentEquippedItemID != 0 && currentItemThirdPerson == null)
@@ -146,7 +146,7 @@ public class PlayerAnimationController : NetworkBehaviour {
 		}
 	}
 
-	public void DespawnItemThirdPerson () // Called by animation event handler // TODO: fix weapon spawn/despawn affecting all players
+	public void DespawnItemThirdPerson () // Called by anim behaviour
 	{
 		CmdDespawnItemThirdPerson (gameObject.GetComponent<NetworkIdentity>().netId);
 		Debug.Log ("Calling command to despawn on " + name);
@@ -184,9 +184,12 @@ public class PlayerAnimationController : NetworkBehaviour {
 	{
 		GameObject player = NetworkServer.FindLocalObject (playerID);
 		PlayerAnimationController animController = player.GetComponent<PlayerAnimationController> ();
+
 		animController.currentItemThirdPerson = GameObject.Instantiate (ItemManager.Dictionary.GetItem (itemID).ItemModel, thirdPersonRightHand.transform.position, thirdPersonRightHand.transform.rotation, thirdPersonRightHand.transform);
+		animController.currentItemThirdPersonShadows = GameObject.Instantiate (ItemManager.Dictionary.GetItem (itemID).ItemModel, thirdPersonRightHand.transform.position, thirdPersonRightHand.transform.rotation, thirdPersonRightHand.transform);
 
 		NetworkServer.Spawn (animController.currentItemThirdPerson);
+		NetworkServer.Spawn (animController.currentItemThirdPersonShadows);
 		RpcSpawnItemThirdPerson (animController.currentItemThirdPerson.GetComponent<NetworkIdentity> ().netId);
 	}
 
@@ -204,7 +207,7 @@ public class PlayerAnimationController : NetworkBehaviour {
 	}
 
 	[ClientRpc]
-	void RpcSpawnItemThirdPerson (NetworkInstanceId netId)
+	void RpcSpawnItemThirdPerson (NetworkInstanceId netId) // Sets parent of third person item and sets it to proper visibility layer
 	{
 		currentItemThirdPerson = ClientScene.FindLocalObject (netId);
 		currentItemThirdPerson.transform.SetParent (thirdPersonRightHand.transform);
@@ -213,6 +216,11 @@ public class PlayerAnimationController : NetworkBehaviour {
 			foreach (Transform child in currentItemThirdPerson.GetComponentsInChildren<Transform>())
 			{
 				child.gameObject.layer = 8;
+			}
+			foreach (Transform child in currentItemThirdPersonShadows.GetComponentsInChildren<Transform>())
+			{
+				if (child.GetComponent<Renderer> ())
+					child.GetComponent<Renderer> ().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
 			}
 		}
 	}
@@ -223,7 +231,7 @@ public class PlayerAnimationController : NetworkBehaviour {
 		// We might use this to call something on the clients after calling CmdDespawnItemThirdPerson().
 	}
 
-	IEnumerator SetFov (float fovMultiplier, float time) // TODO there's probably a better place to put FOV changing methods
+	IEnumerator SetFov (float fovMultiplier, float time) // TODO There's probably a better place to put FOV changing methods than PlayerAnimationController.
 	{
 		Camera camera = Player.localPlayer.GetCamera ();
 		float currentTime = 0.0f;

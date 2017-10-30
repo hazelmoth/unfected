@@ -12,7 +12,7 @@ public class Player : NetworkBehaviour {
 
 	private GameObject playerMesh;
 	private GameObject playerHands;
-	private GameObject thirdPersonItem;
+	private GameObject thirdPersonRightHand;
 	private Camera camera;
 	private AudioListener audioListener;
 	private CustomFirstPersonController firstPersonController;
@@ -58,12 +58,12 @@ public class Player : NetworkBehaviour {
 		{
 			if (child.tag == "Right Hand Third Person")
 			{
-				thirdPersonItem = child.gameObject;
+				thirdPersonRightHand = child.gameObject;
 				break;
 			}
 		}
 
-		foreach (Transform child in thirdPersonItem.GetComponentsInChildren<Transform>())
+		foreach (Transform child in thirdPersonRightHand.GetComponentsInChildren<Transform>())
 		{
 			child.gameObject.layer = 8;
 		}
