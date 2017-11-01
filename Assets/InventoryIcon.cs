@@ -12,13 +12,11 @@ public class InventoryIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	private GameObject lastTouchedObject;
 	private GameObject originalParent;
 	private GameObject draggingParent; // Parent object to child icons to as they are being dragged
-	private UIManager uiManager;
 
 	void Start () {
 		rectTransform = GetComponent<RectTransform> ();
 		originalParent = gameObject.transform.parent.gameObject;
 		draggingParent = GameObject.Find ("Drag Parent Object");
-		uiManager = GameObject.FindObjectOfType<UIManager> ();
 	}
 
 	public void OnPointerDown (PointerEventData eventData)
@@ -34,7 +32,7 @@ public class InventoryIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 			if (activeSlot.tag == "Inventory Slot")
 			{
-				uiManager.SetDisplayedInventorySlotAfterSync(activeSlot);
+				UIManager.instance.SetDisplayedInventorySlotAfterSync(activeSlot);
 				Debug.Log ("Setting displayed inventory slot from InventoryIcon");
 			}
 		}
@@ -80,8 +78,16 @@ public class InventoryIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 		if (dragDestination.tag == "Inventory Slot")
 		{
-			uiManager.ManageInventoryDrag (originalParent, dragDestination);
+			UIManager.instance.ManageInventoryDrag (originalParent, dragDestination);
 			Invoke ("ResetIconPosition", 0.1f);
+		}
+		else if (dragDestination.tag != "Inventory Panel" && dragDestination.transform.parent.tag != "Inventory Panel") 
+		{
+			// If an item is released not over any collection of inventory slots, drop it
+			Debug.Log (dragDestination.name);
+			Vector2 inventorySlotToDrop = UIManager.instance.FindIndexOfInventorySlot (originalParent);
+			UIManager.instance.ActivateDropItemAfterSync ((int)inventorySlotToDrop.x, (int)inventorySlotToDrop.y);
+			ResetIconPosition ();
 		}
 		else 
 		{

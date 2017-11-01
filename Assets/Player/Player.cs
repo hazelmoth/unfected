@@ -245,6 +245,11 @@ public class Player : NetworkBehaviour {
 		animationController.DeactivateHands();
 	}
 
+	public void ThrowItemOnGround (int slotX, int slotY)
+	{
+		CmdThrowItemOnGround (slotX, slotY);
+	}
+
 	public void UpdateItemInCurrentHotbarSlot ()
 	{
 		if (activeHotbarSlot != null)
@@ -257,7 +262,14 @@ public class Player : NetworkBehaviour {
 	}
 
 
-
+	[Command]
+	void CmdThrowItemOnGround (int slotX, int slotY)
+	{
+		GameObject itemToThrowOnGround = GameObject.Instantiate(ItemManager.Dictionary.GetItemObject (inventory.GetInventoryArray () [slotX, slotY]));
+		itemToThrowOnGround.transform.position = camera.transform.position + camera.transform.forward * 0.3f;
+		itemToThrowOnGround.GetComponent<Rigidbody> ().velocity = camera.transform.forward * 2.5f;
+		NetworkServer.Spawn (itemToThrowOnGround);
+	}
 
 	[Command]
 	void CmdSetPlayerID(string id)

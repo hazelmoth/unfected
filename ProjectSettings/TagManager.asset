@@ -8,6 +8,7 @@ TagManager:
   - Player Hands
   - Right Hand Third Person
   - Right Hand First Person
+  - Inventory Panel
   layers:
   - Default
   - TransparentFX

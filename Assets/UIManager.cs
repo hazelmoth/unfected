@@ -25,9 +25,13 @@ public class UIManager : MonoBehaviour {
 	private bool isInventoryOpen = false;
 	private int? activeHotbarSlot = null;
 
+	public static UIManager instance;
+
 
 	void Start ()
 	{
+		instance = this;
+
 		EventSystem.current.pixelDragThreshold = 0;
 		inventoryPanel.SetActive (false);
 
@@ -125,6 +129,16 @@ public class UIManager : MonoBehaviour {
 		inventoryItemImage.sprite = item.Icon;
 	}
 
+	void ActivateDropItem (int slotX, int slotY)
+	{
+		Player.localPlayer.ThrowItemOnGround (slotX, slotY); // NOTE: This assumes that the item we're throwing on the ground has NOT YET BEEN DELETED by the following line.
+		Player.localPlayer.GetComponent<PlayerInventory> ().DeleteItemFromInventory (slotX, slotY);
+		Player.localPlayer.GetComponent<PlayerInventory> ().RequestSyncInventory ();
+		Player.localPlayer.UpdateItemInCurrentHotbarSlot ();
+		UpdateInventoryPanelsAfterSync ();
+		Debug.Log ("ActivateDropItem called");
+	}
+
 
 	IEnumerator UpdateInventoryPanelsCoroutine ()
 	{
@@ -175,6 +189,32 @@ public class UIManager : MonoBehaviour {
 
 		SetDisplayedInventorySlot (inventorySlot, inv.GetInventoryArray());
 	}
+
+	IEnumerator ActivateDropItemCoroutine (int slotX, int slotY)
+	{
+		Debug.Log ("ActivateDropItemCoroutine started");
+		PlayerInventory inv = Player.localPlayer.GetComponent<PlayerInventory> ();
+		if (!inv)
+		{
+			Debug.LogError ("No inventory found on local player");
+			yield break;
+		}
+
+		inv.RequestSyncInventory ();
+		float syncStartTime = Time.unscaledTime;
+
+		while (inv.isAwaitingInventorySync)
+		{
+			if (Time.unscaledTime - syncStartTime > 10.0f) // End coroutine if we've been waiting for sync longer than 10 seconds. TODO: maybe make a universal time out length somewhere.
+			{
+				Debug.LogError("Timed out attempting to retrieve inventory");
+				yield break;
+			}
+			yield return null;
+		}
+
+		ActivateDropItem (slotX, slotY);
+	}
 		
 
 	public void UpdateInventoryPanelsAfterSync ()
@@ -185,6 +225,11 @@ public class UIManager : MonoBehaviour {
 	public void SetDisplayedInventorySlotAfterSync (GameObject inventorySlot)
 	{
 		StartCoroutine (SetDisplayedInventorySlotCoroutine (inventorySlot));
+	}
+
+	public void ActivateDropItemAfterSync (int slotX, int slotY)
+	{
+		StartCoroutine (ActivateDropItemCoroutine (slotX, slotY));
 	}
 
 	public Vector2 FindIndexOfInventorySlot (GameObject slot)

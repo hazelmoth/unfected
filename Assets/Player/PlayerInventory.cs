@@ -104,18 +104,17 @@ public class PlayerInventory : NetworkBehaviour {
 	}
 
 
-	public void DropItem (int slotX, int slotY)
+	public void DeleteItemFromInventory (int slotX, int slotY)
 	{
-		CmdDropItem (slotX, slotY);
+		CmdDeleteItemFromInventory (slotX, slotY);
 		RequestSyncInventory ();
 	}
 		
 	[Command]
-	void CmdDropItem (int slotX, int slotY)
+	void CmdDeleteItemFromInventory (int slotX, int slotY)
 	{
 		if (inventory[slotX, slotY] != 0)
 		{
-			// TODO Throw the item on the ground!
 			inventory[slotX, slotY] = 0;
 		}
 	}
